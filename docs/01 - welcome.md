@@ -65,8 +65,18 @@ via le framework [FastAPI](https://fastapi.tiangolo.com) et l'ORM
 Votre rôle est de developper l'intégralité de la partie frontend du projet, selon
 les axes suivants:
 
+<br>
+
+- Définir l'identité visuelle de la marque de _Jean Cloud_ et la mettre en oeuvre.
 - Définir et faire évoluer les différentes vues de l'application web.
 - Implémenter et tester l'application web.
+
+<br>
+
+L'application web devra être conçu avec le framework [VueJS](https://vuejs.org),
+avec un approche la plus modulaire possible en terme de vues et de composants.
+L'état de l'application sera maintenu via l'évolution de _VueX_:
+[Pinia](https://pinia.vuejs.org).
 
 <br>
 
