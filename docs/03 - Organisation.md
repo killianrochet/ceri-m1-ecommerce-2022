@@ -11,7 +11,7 @@ Le projet sera divisé en 4 sprints, dont la plannification global
 première séance avec votre client. A l'issue de cette phase de
 plannification seront crées 4 milestones correspondant sur votre
 repository [Github](https://github.com), auquel seront rattachés
-les différentes issues correspondant à vos epics et stories<sup>1</sup>.
+les différentes issues correspondant à vos epics et stories.
 
 <br>
 
@@ -50,7 +50,7 @@ l'appréciation sera faite en fonction des critères suivants:
 <br>
 
 La dernière séance de TP donnera lieu à la livraison du projet à votre
-client, sous forme de soutenance ou seront évalués:
+client, sous forme de soutenance où seront évalués:
 
 <br>
 
