@@ -98,4 +98,7 @@ et créer un premier squelette d'API avec un endpoint de test.
 
 ### Configuration du projet SRE
 
+#### Configuration des labels
+
+
 > tbd
