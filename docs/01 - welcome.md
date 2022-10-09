@@ -24,31 +24,57 @@ Votre équipe doit être constitué de 3 personnes, afin d'assurer les rôles su
 
 <br>
 
-| Rôle              | Responsabilités                                                     |
-| ----------------- | ------------------------------------------------------------------- |
-| Backend engineer  | Database schema design, backend implementation and testing          |
-| Frontend engineer | Web application implementation and testing                          |
-| SRE engineer      | Manage infrastructure, deployment processes, CI and CD              |
+| Rôle                      | Responsabilités                                                       |
+| ------------------------- | --------------------------------------------------------------------- |
+| Backend engineer          | Database schema design, backend implementation and testing            |
+| Frontend engineer         | Web application implementation and testing                            |
+| Site reliability engineer | Manage infrastructure, continous integration and deployment processes |
 
+<br>
 
+### Vous êtes Backend engineer
 
----
+<br>
 
-## You are a backend engineer
+Votre rôle est de developper l'intégralité de la partie backend du projet, selon
+les axes suivants:
 
-### Responsability
+<br>
 
-As a backend engineer, you will:
+- Définir et faire évoluer un schéma de base de donnée.
+- Définir en collaboration avec le Frontend engineer, différentes APIs.
+- Implémenter et tester les différents APIs.
 
-- Design and maintain the database schema, as well as the associated migration.
-- Design, implement and test a backend API.
-- Collaborate with the SRE
-- Collaborate with the 
+<br>
 
----
+Les différentes APIs seront mises en oeuvre en [Python](https://www.python.org),
+via le framework [FastAPI](https://fastapi.tiangolo.com) et l'ORM
+[SQLModel](https://sqlmodel.tiangolo.com). Le stocakge des données sera réalisé sur la base de donnée relationnelle [MySQL](https://www.mysql.com), et les mises à jour de schéma seront réalisées via l'outil de gestion de migration de votre choix<sup>1</sup>.
 
-## You are a frontend engineer
+<br>
 
----
+> <sup>1</sup> Le choix de l'outil de migration doit être fait en accord avec le SRE de votre
+> équipe, qui le mettra en oeuvre dans la partie delivery.
 
-## You are a SRE engineer
+<br>
+
+### Vous êtes Frontend engineer
+
+<br>
+
+Votre rôle est de developper l'intégralité de la partie frontend du projet, selon
+les axes suivants:
+
+- Définir et faire évoluer les différentes vues de l'application web.
+- Implémenter et tester l'application web.
+
+<br>
+
+### Vous êtes Site reliability engineer
+
+<br>
+
+- Définir et implémenter les différentes process d'intégration continue.
+- Définir et implémenter les différentes process de delivery.
+- Définir et implémenter les resources d'infrastructure.
+- Etre garant de la qualité globale du projet.
