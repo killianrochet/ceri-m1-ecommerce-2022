@@ -1,4 +1,5 @@
 # TP - 01: Welcome aboard !
+
 <br>
 
 > Bonjour à tous ! Je m'appelle _Jean Cloud Vinil_, propriétaire d'une boutique d'achat
@@ -32,7 +33,7 @@ Votre équipe doit être constitué de 3 personnes, afin d'assurer les rôles su
 
 <br>
 
-### Vous êtes Backend engineer
+### ✨ Vous êtes Backend engineer
 
 <br>
 
@@ -58,7 +59,7 @@ via le framework [FastAPI](https://fastapi.tiangolo.com) et l'ORM
 
 <br>
 
-### Vous êtes Frontend engineer
+### 🎨 Vous êtes Frontend engineer
 
 <br>
 
@@ -80,11 +81,18 @@ L'état de l'application sera maintenu via l'évolution de _VueX_:
 
 <br>
 
-### Vous êtes Site reliability engineer
+### 🔧 Vous êtes Site reliability engineer
 
 <br>
 
-- Définir et implémenter les différentes process d'intégration continue.
-- Définir et implémenter les différentes process de delivery.
+Votre rôle couvrira différents aspects liées au SRE, incluant:
+
+- Définir et implémenter les différents process d'intégration continue.
+- Définir et implémenter un process de continuous delivery.
 - Définir et implémenter les resources d'infrastructure.
 - Etre garant de la qualité globale du projet.
+
+<br>
+
+Le projet sera déployé sur [Google Cloud Platform](https://cloud.google.com), et maintenu
+via l'outil de configuration as code [Terraform](https://www.terraform.io).
