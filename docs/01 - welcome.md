@@ -1,10 +1,17 @@
 # TP - 01: Welcome aboard !
 
-> Bonjour à tous ! Je m'appelle _Jean Cloud Vinile_, propriétaire d'une boutique d'achat
-> neuf et occasion de disque vinyl de tout genre musicaux ! Comme beaucoup, mon activité
-> a été grandement impacté par la crise sanitaire et mes meilleurs amis entrepreneurs
-> mon conseillé d'ouvrir une boutique en ligne afin d'augmenter ma visibilité et surtout,
-> mon chiffre d'affaire.
+> Bonjour à tous ! Je m'appelle _Jean Cloud Vinil_, propriétaire d'une boutique d'achat
+> neuf et occasion de disque vinyle de tout genre musicaux ! Comme beaucoup, mon activité
+> a été grandement impactée par la crise sanitaire et mon entourage m'a fortement conseillé
+> d'ouvrir une boutique en ligne afin d'augmenter ma visibilité et surtout, mon chiffre
+> d'affaire.
+
+<p align="center">
+    <img src="https://media4.giphy.com/media/z9lZMI5UDdI08/giphy.gif?cid=ecf05e47e5vqzwqu9sn3q84ho241j3dx1ltfww3yttnr85oh&rid=giphy.gif&ct=g">
+</p>
+<p align="center">
+    <em>Démonstration de skill, par Jean Cloud Vinil</em>
+</p>
 
 Dans cette simulation incroyablement réaliste, vous allez représenter une agence de service
 numérique.
