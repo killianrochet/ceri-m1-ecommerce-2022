@@ -1,10 +1,13 @@
 # TP - 01: Welcome aboard !
+<br>
 
 > Bonjour à tous ! Je m'appelle _Jean Cloud Vinil_, propriétaire d'une boutique d'achat
 > neuf et occasion de disque vinyle de tout genre musicaux ! Comme beaucoup, mon activité
 > a été grandement impactée par la crise sanitaire et mon entourage m'a fortement conseillé
 > d'ouvrir une boutique en ligne afin d'augmenter ma visibilité et surtout, mon chiffre
 > d'affaire.
+
+<br>
 
 <p align="center">
     <img src="https://media4.giphy.com/media/z9lZMI5UDdI08/giphy.gif?cid=ecf05e47e5vqzwqu9sn3q84ho241j3dx1ltfww3yttnr85oh&rid=giphy.gif&ct=g">
@@ -13,14 +16,11 @@
     <em>Démonstration de skill, par Jean Cloud Vinil</em>
 </p>
 
-Dans cette simulation incroyablement réaliste, vous allez représenter une agence de service
-numérique.
-
 ## Constitution des équipes
 
-Vous êtes l'équipe en charge de mettre en oeuvre la boutique en ligne de notre cher
-_Jean Cloud_, vous devez être consistué de 3 personnes, chacun devant assurer un des rôles
-suivant:
+Dans cette simulation incroyablement réaliste, vous allez représenter une agence de service
+numérique en charge de mettre en oeuvre la boutique en ligne de notre cher ami _Jean Cloud_.
+Votre équipe doit être constitué de 3 personnes, afin d'assurer les rôles suivants:
 
 | Rôle              | Responsabilités                                                     |
 | ----------------- | ------------------------------------------------------------------- |
@@ -28,9 +28,6 @@ suivant:
 | Frontend engineer | Web application implementation and testing                          |
 | SRE engineer      | Manage infrastructure, deployment processes, CI and CD              |
 
-
-Vous êtes l'équipe en charge de mettre en oeuvre la boutique en ligne de notre
-cher Jean Cloud et en tant qu'équipe, votre première tache sera de trouver:
 
 
 ---
