@@ -1,4 +1,4 @@
-# TP - 02: Setup project
+# 02 - Configuration du project
 
 <br>
 
@@ -30,7 +30,7 @@ entrainera une pénalité à votre équipe, à savoir un point sur votre note.
 
 <br>
 
-## 🔨 Configuration des projets
+## 🔨 Configuration des projets par stack
 
 <br>
 
