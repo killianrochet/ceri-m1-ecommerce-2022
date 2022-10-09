@@ -19,6 +19,8 @@
 
 ## Constitution des équipes
 
+<br>
+
 Dans cette simulation incroyablement réaliste, vous allez représenter une agence de service
 numérique en charge de mettre en oeuvre la boutique en ligne de notre cher ami _Jean Cloud_.
 Votre équipe doit être constitué de 3 personnes, afin d'assurer les rôles suivants:

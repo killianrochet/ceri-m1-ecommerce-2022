@@ -1,50 +1,57 @@
 # TP - 02: Setup project
 
+<br>
 
-[](https://github.com/Faylixe/ceri-m1-ecommerce-2022/fork)
+## 🎉 Create repository
 
-You will work as a team, and as a team the first thing to do is to find a name,
-which will be your brand. Your team must include at least 3 members:
+<br>
 
-- A backend engineer
-- A frontend engineer
-- A SRE engineer
+Before to dive in, every member of your team must have a
+[Github account](https://github.com/signup). At least the _SRE_
+should have a valid Google account to interact with
+[Google Cloud Platform](https://cloud.google.com). The SRE will
+then create the dedicated Github repository for your project, by
+forking this repository using the following link:
 
-| Role              | Responsabilities                                                    |
-| ----------------- | ------------------------------------------------------------------- |
-| Backend engineer  | Design database schema, implement and test backend                  |
-| Frontend engineer | Design, implement and test web application                          |
-| SRE engineer      | Define and manage infrastructure, deployment processes, and CI / CD |
+<br>
 
----
+[![Fork me](https://badgen.net/badge/Github/Fork%20Me/?scale=2&icon=github)](https://github.com/Faylixe/ceri-m1-ecommerce-2022/fork)
 
-## You are a backend engineer
+<br>
 
-### Responsability
+Then add the other team's member as collaborator.
 
-As a backend engineer, you will:
+<br>
 
-- Design and maintain the database schema, as well as the associated migration.
-- Design, implement and test a backend API.
-- Collaborate with the SRE
-- Collaborate with the 
+> :warning: forking the repository is very important as it will allow
+~~_Jean Cloud Vinil_~~ me to visualize every projects.
+
+<br>
 
 ### Setup the backend project
 
+<br>
+
 ```bash
-cd backend
+mkdir backend && cd backend
+pip install --user poetry
 poetry init
+poetry add fastapi sqlmodel uvicorn
 poetry add --dev pytest isort black mypy
 ```
 
-### Setup the CI / CD pipeline
+Then open the created file `pyproject.toml` and add the following section to the end:
 
+```toml
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+```
 
+### Setup the frontend project
 
----
+> tbd
 
-## You are a frontend engineer
+### Setup the SRE project
 
----
-
-## You are a SRE engineer
+> tbd
