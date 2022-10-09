@@ -13,7 +13,7 @@
     <img src="https://media4.giphy.com/media/z9lZMI5UDdI08/giphy.gif?cid=ecf05e47e5vqzwqu9sn3q84ho241j3dx1ltfww3yttnr85oh&rid=giphy.gif&ct=g">
 </p>
 <p align="center">
-    <em>Démonstration de skill, par Jean Cloud Vinil</em>
+    <em>Grosse démonstration de soft skills, par Jean Cloud Vinil</em>
 </p>
 
 ## Constitution des équipes
@@ -21,6 +21,8 @@
 Dans cette simulation incroyablement réaliste, vous allez représenter une agence de service
 numérique en charge de mettre en oeuvre la boutique en ligne de notre cher ami _Jean Cloud_.
 Votre équipe doit être constitué de 3 personnes, afin d'assurer les rôles suivants:
+
+<br>
 
 | Rôle              | Responsabilités                                                     |
 | ----------------- | ------------------------------------------------------------------- |
