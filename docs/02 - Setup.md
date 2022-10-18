@@ -94,11 +94,10 @@ et créer un premier squelette d'API avec un endpoint de test.
 
 ### Configuration du projet frontend
 
-> tbd
+Vous pouvez suivre la documentation de [VueJS](https://vuejs.org) afin de
+configurer votre projet via `npm`.
 
 ### Configuration du projet SRE
 
-#### Configuration des labels
-
-
-> tbd
+Les différents taches liées à la configuration du projet coté SRE seront vu
+pendant les différentes séances.
