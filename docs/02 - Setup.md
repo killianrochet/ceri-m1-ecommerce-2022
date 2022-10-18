@@ -24,7 +24,7 @@ le repository crée.
 
 <br>
 
-> :warning: vous devez absolument forker le repositor your permettre à ~~_Jean Cloud Vinil_~~
+> :warning: vous devez absolument forker le repository pour permettre à ~~_Jean Cloud Vinil_~~
 votre enseignant de pouvoir suivre vos projets facilement. Tout manquement à cette régle
 entrainera une pénalité à votre équipe, à savoir un point sur votre note.
 

@@ -7,7 +7,7 @@
 <br>
 
 Le projet sera divisé en 4 sprints, dont la plannification global
-(i.e définition de la roadmap produit) sera effectué lors de la
+(i.e définition de la roadmap produit) sera effectuée lors de la
 première séance avec votre client. A l'issue de cette phase de
 plannification seront crées 4 milestones correspondant sur votre
 repository [Github](https://github.com), auquel seront rattachés
@@ -17,7 +17,7 @@ les différentes issues correspondant à vos epics et stories.
 
 Chaque sprint aura pour échance une séance de TP, au cours de laquelle
 vous aurez l'occasion de faire une retrospective du sprint écoulé avec
-votre client, et entammé, la plannification du sprint suivant, qui
+votre client, et entammer, la plannification du sprint suivant, qui
 démarrera à la fin de la séance de TP en question.
 
 <br>
