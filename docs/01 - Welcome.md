@@ -52,7 +52,7 @@ les axes suivants:
 
 Les différentes APIs seront mises en oeuvre en [Python](https://www.python.org),
 via le framework [FastAPI](https://fastapi.tiangolo.com) et l'ORM
-[SQLModel](https://sqlmodel.tiangolo.com). Le stocakge des données sera réalisé sur la base de donnée relationnelle [MySQL](https://www.mysql.com), et les mises à jour de schéma seront réalisées via l'outil de gestion de migration de votre choix<sup>1</sup>.
+[SQLModel](https://sqlmodel.tiangolo.com). Le stockage des données sera réalisé sur la base de donnée relationnelle [MySQL](https://www.mysql.com), et les mises à jour de schéma seront réalisées via l'outil de gestion de migration de votre choix<sup>1</sup>.
 
 <br>
 
