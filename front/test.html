@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ma première interface</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div id="app">
+            <div class="container">
+                <div class="row">
+                    <p class="p-5 mb-4 bg-light rounded-3">Login : <input type="text" v-model="user"/> | Vous êtes connectés en tant que {{ user }}</p>
+                </div>
+
+                <h1 v-if="commandes.length > 0">Produits commandés</h1>
+                <div class="row">
+                    <fiche-produit v-for="commande in commandes" v-bind:nom="commande" role="recap"></fiche-produit>
+                </div>
+
+                <h1 v-bind:class="affichage">Produits disponibles</h1>
+                <div class="row">
+                    <fiche-produit v-for="produit in produits" v-bind:nom="produit" v-on:commande-passee="commander" role="commande"></fiche-produit>
+
+                    <!-- <div class="col-3" v-for="produit in produits">
+                        <p class="p-5 mb-4 bg-light rounded-3">
+                            {{ produit }}<br />
+                            <button v-on:click="commander(produit)">Commander</button>
+                        </p>
+                    </div> -->
+                </div>
+            </div>
+            
+        </div>
+
+        <script>
+            Vue.component('fiche-produit', {
+                template: `
+                    <div class=col-3>
+                        <p class="p-5 mb-4 bg-light rounded-3">
+                            {{ nom }}<br />
+                        <button v-on:click="passer_commande(nom)" v-if="role == 'commande'">Commander</button>
+                        </p>
+                    </div>
+                    `,
+                props: ['nom', 'role'],
+                methods: {
+                    passer_commande: function(produit) {
+                        this.$emit('commande-passee', produit)
+                    }
+                },
+            })
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    user: "Thomas",
+                    produits: ["Get Lucky", "Toxic", "Allumer le feu", "Sous le vent"],
+                    commandes: [],
+                    affichage: "display-4"
+                },
+                methods: {
+                    commander: function(produit){
+                        this.commandes.push(produit);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
