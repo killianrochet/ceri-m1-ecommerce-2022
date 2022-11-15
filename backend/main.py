@@ -35,10 +35,17 @@ class Chanson(SQLModel,table=True):
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/catalogue/{artist_name}")
-def read_catalogue_art(artist_name: str):
+@app.get("/artiste/{artist_name}")
+def read_name_art(artist_name: str):
     with Session(engine) as session:
-        statement = select(Albums).where(Albums.artist_id == artist_name)
+        statement = select(Artists).where(Artists.name == artist_name)
+        art = session.exec(statement).all()
+        return(art)
+
+@app.get("/catalogue/{artist_id}")
+def read_catalogue_art(artist_id: int):
+    with Session(engine) as session:
+        statement = select(Albums).where(Albums.artist_id == artist_id)
         catalogue = session.exec(statement).all()
         return(catalogue)
     
