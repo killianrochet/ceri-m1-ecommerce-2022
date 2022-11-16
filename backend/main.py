@@ -22,11 +22,12 @@ class Albums(SQLModel,table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     artist_id: Optional[int] = Field(default=None,foreign_key="artists.id")
-    
-class Chanson(SQLModel,table=True):
+    image: str
+
+class Chansons(SQLModel,table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
-    artist_id: Optional[int] = Field(default=None,foreign_key="artists.id")
+    artist: Optional[int] = Field(default=None,foreign_key="artists.id")
     album_id: Optional[int] = Field(default=None,foreign_key="albums.id")
     
     
@@ -42,13 +43,28 @@ def read_name_art(artist_name: str):
         art = session.exec(statement).all()
         return(art)
 
-@app.get("/catalogue/{artist_id}")
+@app.get("/catalogue/albums/{album_id}")
+def read_catalogue_art(album_id: int):
+    with Session(engine) as session:
+        statement = select(Chansons).where(Chansons.album_id == album_id)
+        catalogue = session.exec(statement).all()
+        return(catalogue)
+
+
+@app.get("/catalogue/artiste/{artist_id}")
 def read_catalogue_art(artist_id: int):
     with Session(engine) as session:
         statement = select(Albums).where(Albums.artist_id == artist_id)
         catalogue = session.exec(statement).all()
         return(catalogue)
-    
+
+@app.get("/catalogue/list/albums")
+def get_list():
+    with Session(engine) as session:
+        statement = select(Albums)
+        allchants = session.exec(statement).all()
+        return(allchants)
+
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
