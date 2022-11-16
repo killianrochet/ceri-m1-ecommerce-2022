@@ -18,11 +18,7 @@ class Artists(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     
-class Albums(SQLModel,table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    artist_id: Optional[int] = Field(default=None,foreign_key="artists.id")
-    image: str
+
 
 class Chansons(SQLModel,table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -30,6 +26,18 @@ class Chansons(SQLModel,table=True):
     artist: Optional[int] = Field(default=None,foreign_key="artists.id")
     album_id: Optional[int] = Field(default=None,foreign_key="albums.id")
     
+class Albums(SQLModel,table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    artist_id: Optional[int] = Field(default=None,foreign_key="artists.id")
+    image: str
+    
+class Albums_output:
+    def __init__(self,id,name,image):
+        self.id = id
+        self.name = name
+        self.image = image
+        self.songs = []
     
 
 @app.get("/")
@@ -51,6 +59,7 @@ def read_catalogue_art(album_id: int):
         return(catalogue)
 
 
+
 @app.get("/catalogue/artiste/{artist_id}")
 def read_catalogue_art(artist_id: int):
     with Session(engine) as session:
@@ -58,12 +67,60 @@ def read_catalogue_art(artist_id: int):
         catalogue = session.exec(statement).all()
         return(catalogue)
 
-@app.get("/catalogue/list/albums")
+
+
+
+@app.get("/api/album/{album_id}")
+def get_list(album_id:int):
+    with Session(engine) as session:
+        statement = select(Albums).where(Albums.id == album_id)
+        allalbums = session.exec(statement).all()
+        output = []
+        for album in allalbums:
+            obj = Albums_output(album.id,album.name,album.image)
+            statement_match = select(Chansons).where(Chansons.id == album.id)
+            allchants = session.exec(statement_match).all()
+            obj.songs = allchants
+            output.append(obj)
+        return(output)
+
+@app.get("/api/album/song")
+def read_songs():
+    with Session(engine) as session:
+        statement = select(Chansons)
+        catalogue = session.exec(statement).all()
+        return(catalogue)
+@app.get("/catalogue/albums/{album_id}")
+def read_catalogue_art(album_id: int):
+    with Session(engine) as session:
+        statement = select(Chansons).where(Chansons.album_id == album_id)
+        catalogue = session.exec(statement).all()
+        return(catalogue)
+
+
+@app.get("/catalogue/artiste/{artist_id}")
+def read_catalogue_art(artist_id: int):
+    with Session(engine) as session:
+        statement = select(Albums).where(Albums.artist_id == artist_id)
+        catalogue = session.exec(statement).all()
+        return(catalogue)
+
+
+
+
+@app.get("/api/albums")
 def get_list():
     with Session(engine) as session:
         statement = select(Albums)
-        allchants = session.exec(statement).all()
-        return(allchants)
+        allalbums = session.exec(statement).all()
+        output = []
+        for album in allalbums:
+            obj = Albums_output(album.id,album.name,album.image)
+            statement_match = select(Chansons).where(Chansons.id == album.id)
+            allchants = session.exec(statement_match).all()
+            obj.songs = allchants
+            output.append(obj)
+        return(output)
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
