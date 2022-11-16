@@ -23,12 +23,16 @@ class Artists(SQLModel, table=True):
 class Chansons(SQLModel,table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
+    time: str
     artist: Optional[int] = Field(default=None,foreign_key="artists.id")
     album_id: Optional[int] = Field(default=None,foreign_key="albums.id")
     
 class Albums(SQLModel,table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
+    author: str
+    price: int
+    category: str
     artist_id: Optional[int] = Field(default=None,foreign_key="artists.id")
     image: str
     
