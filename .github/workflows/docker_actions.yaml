@@ -7,7 +7,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches:
-      - 'main'
+      - 'backend'
   pull_request:
     branches:
       - 'main'
@@ -37,20 +37,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Front image Docker
-        uses: docker/build-push-action@v2
-        with:
-          # relative path to the place where source code with Dockerfile is located
-          context: ./front/
-          # Note: tags has to be all lower-case
-          tags: ghcr.io/killianrochet/front-end:latest
-          # build on feature branches, push only on main branch
-          push: ${{ github.ref == 'refs/heads/main' }}
-
-      - name: Front-end digest
-        run: echo ${{ steps.docker_build.outputs.digest }}    
+          password: ${{ secrets.GITHUB_TOKEN }}  
 
       - name: Back docker image
         uses: docker/build-push-action@v2
