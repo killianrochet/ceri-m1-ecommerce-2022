@@ -13,6 +13,6 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 # 
 COPY ./app /code/app
 
-ENV PORT=80
+ENV PORT="80"
 # 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "${PORT}"]
