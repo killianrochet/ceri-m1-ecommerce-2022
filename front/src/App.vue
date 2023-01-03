@@ -1,14 +1,15 @@
 <template>
-    <GoogleLogin :callback="callbackResponse"/>
-
-    <nav>
-      <router-link to="/">Accueil</router-link> |
-      <router-link to="/cart">Panier</router-link>
-    </nav>
-    <router-view/>
+  <nav>
+    <router-link to="/">Accueil</router-link> |
+    <router-link to="/cart">Panier</router-link>
+  </nav>
+  <AuthenticationDiv/>
+  <router-view/>
 </template>
 
 <script>
+  import AuthenticationDiv from './components/authentication/AuthenticationDiv.vue'
+
   // function decodeJwtResponse(token) {
   //   let base64Url = token.split('.')[1]
   //   let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -18,11 +19,6 @@
   //   return JSON.parse(jsonPayload)
   // }
 
-  const callbackResponse = (response) => {
-    // This callback will be triggered when the user selects or login to
-    // his Google account from the popup
-    console.log("Handle the response", response)
-  }
 
   // let responsePayload;
   // console.log(responsePayload);
@@ -46,6 +42,9 @@
   // }
 
   export default {
+    components: {
+      AuthenticationDiv
+    },
     mounted() {
       this.$store.commit('updateCartFromLocalStorage'); // Changed commit to dispatch
     }
