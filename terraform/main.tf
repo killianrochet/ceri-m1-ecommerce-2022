@@ -24,16 +24,18 @@ data "google_secret_manager_secret" "dbname" {
   secret_id = "mysql-database-bluelion"
 }
 
+variable "gcp_cred" {
+  type = string
+  sensitive = true
+  description = "Google Cloud service account credentials"
+
+}
+
 provider "google" {
   project = "ceri-m1-ecommerce-2022"
   region  = "europe-west1"
   credentials = var.gcp_cred
 }
-
-variable "gcp_cred" {
-  default=""
-}
-
 
 resource "google_cloud_run_service" "bluelion-backend" {
   provider = google
