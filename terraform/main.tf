@@ -27,10 +27,10 @@ data "google_secret_manager_secret" "dbname" {
 provider "google" {
   project = "ceri-m1-ecommerce-2022"
   region  = "europe-west1"
-  credentials = var.GOOGLE_APPLICATION_CREDENTIALS
+  credentials = var.gcp_cred
 }
 
-variable "GOOGLE_APPLICATION_CREDENTIALS" {
+variable "gcp_cred" {
   default=""
 }
 
