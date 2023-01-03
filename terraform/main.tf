@@ -46,7 +46,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
     spec {
       service_account_name = "terraform-bluelion@ceri-m1-ecommerce-2022.iam.gserviceaccount.com"
       containers {
-        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion"
+        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.1"
       }
     }
     metadata {
