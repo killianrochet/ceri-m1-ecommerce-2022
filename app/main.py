@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from google.colab import auth
 from google.cloud.sql.connector import Connector
 import os
+
 if os.environ['GOOGLE_APPLICATION_CREDENTIALS'] is not None:
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
 auth.authenticate_user()
