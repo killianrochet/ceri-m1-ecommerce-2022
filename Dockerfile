@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 # 
 COPY ./app /code/app
 
-ENV PORT="8080"
+ENV PORT=8080
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
 # 
