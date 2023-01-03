@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "main"
+      - "back_docker"
 jobs:
   deploy:
     environment: "2022"
