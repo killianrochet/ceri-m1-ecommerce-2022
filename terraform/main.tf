@@ -25,6 +25,7 @@ data "google_secret_manager_secret" "dbname" {
 }
 
 variable "gcp_cred" {
+  default=""
   type = string
   sensitive = true
   description = "Google Cloud service account credentials"
