@@ -15,4 +15,4 @@ COPY ./app /code/app
 
 ENV PORT=80
 # 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${PORT}"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "${PORT}"]
