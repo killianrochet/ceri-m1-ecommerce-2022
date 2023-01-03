@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: ./backend/
+          context: ../backend/
           # Note: tags has to be all lower-case
           tags: europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion
           # build on feature branches, push only on main branch
