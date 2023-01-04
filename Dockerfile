@@ -9,7 +9,7 @@ COPY ./requirements.txt /code/requirements.txt
 COPY entrypoint.sh ./entrypoint.sh
 RUN chmod +x entrypoint.sh
 #
-RUN pip install wheel
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # 
