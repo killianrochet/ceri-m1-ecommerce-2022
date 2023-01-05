@@ -1,9 +1,11 @@
 <template>
+  <AuthenticationDiv/>
+
   <nav>
     <router-link to="/">Accueil</router-link> |
     <router-link to="/cart">Panier</router-link>
   </nav>
-  <AuthenticationDiv/>
+  
   <router-view/>
 </template>
 
