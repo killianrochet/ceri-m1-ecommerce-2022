@@ -70,7 +70,7 @@ class Albums_output:
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World V2"}
+    return {"Hello": "World"}
 
 @app.get("/artiste/{artist_name}")
 def read_name_art(artist_name: str):
