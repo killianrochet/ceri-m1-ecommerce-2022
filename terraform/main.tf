@@ -57,6 +57,14 @@ resource "google_cloud_run_service" "bluelion-backend" {
   }
 }
 
+resource "google_cloud_run_service_iam_member" "noauth" {
+  location    = google_cloud_run_service.bluelion-backend.location
+  project     = google_cloud_run_service.bluelion-backend.project
+  service     = google_cloud_run_service.bluelion-backend.name
+  role        = "roles/run.invoker"
+  member      = "allUsers"
+}
+
 output "url" {
   value = "${google_cloud_run_service.bluelion-backend.status[0].url}"
 }
