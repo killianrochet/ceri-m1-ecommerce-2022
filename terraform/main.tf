@@ -70,7 +70,7 @@ resource "google_cloud_run_service" "bluelion-frontend" {
         image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion-frontend:0.0.1"
         env {
           name = "BACKEND_URL"
-          value = google_cloud_run_service.backend.status[0].url
+          value = google_cloud_run_service.bluelion-backend.status[0].url
         }
         ports {
           container_port = 80
