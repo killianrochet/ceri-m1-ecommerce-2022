@@ -8,7 +8,7 @@ terraform {
   }
 }
 
-data "google_secret_manager_secret" "host" {
+data "google_secret_manager_secret" "address" {
   secret_id = "mysql-address"
 }
 
@@ -20,7 +20,7 @@ data "google_secret_manager_secret" "password" {
   secret_id = "mysql-password-bluelion"
 }
 
-data "google_secret_manager_secret" "dbname" {
+data "google_secret_manager_secret" "database" {
   secret_id = "mysql-database-bluelion"
 }
 
