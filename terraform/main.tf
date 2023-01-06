@@ -57,6 +57,40 @@ resource "google_cloud_run_service" "bluelion-backend" {
   }
 }
 
+
+resource "google_cloud_run_service" "bluelion-frontend" {
+
+  name     = "orangedog-frontend"
+  location = "europe-west1"
+
+  template {
+    spec {
+      service_account_name = "terraform-bluelion@ceri-m1-ecommerce-2022.iam.gserviceaccount.com"
+      containers {
+        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion-frontend:0.0.1"
+        env {
+          name = "BACKEND_URL"
+          value = google_cloud_run_service.backend.status[0].url
+        }
+        ports {
+          container_port = 80
+        }
+      }
+    }
+
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/maxScale" = "1"
+      }
+    }
+  }
+
+  traffic {
+    percent = 100
+    latest_revision = true
+  }
+}
+
 resource "google_cloud_run_service_iam_member" "noauth" {
   location    = google_cloud_run_service.bluelion-backend.location
   project     = google_cloud_run_service.bluelion-backend.project
