@@ -80,7 +80,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
           value = "orangedog"
         }
         ports {
-          container_port = 5000
+          container_port = 80
         }
       }
     }
