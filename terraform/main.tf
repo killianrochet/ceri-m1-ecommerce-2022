@@ -79,9 +79,6 @@ resource "google_cloud_run_service" "bluelion-backend" {
           name = "DATABASE_USER"
           value = "orangedog"
         }
-        ports {
-          container_port = 80
-        }
       }
     }
 
