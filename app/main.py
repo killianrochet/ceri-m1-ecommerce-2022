@@ -4,6 +4,8 @@ from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
 
+from sqlalchemy import *
+
 import os
 if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
