@@ -129,7 +129,7 @@ resource "google_cloud_run_service" "bluelion-frontend" {
 }
 
 
-data "google_iam_policy" "noauth" {
+data "google_iam_policy" "invokers" {
   binding {
     role = "roles/run.invoker"
     members = [
@@ -138,12 +138,11 @@ data "google_iam_policy" "noauth" {
   }
 }
 
-resource "google_cloud_run_service_iam_member" "noauth" {
-  location    = google_cloud_run_service.bluelion-backend.location
-  project     = google_cloud_run_service.bluelion-backend.project
-  service     = google_cloud_run_service.bluelion-backend.name
-  role        = "roles/run.invoker"
-  member      = "allUsers"
+resource "google_cloud_run_service_iam_member" "invokers" {
+  location = google_cloud_run_service.backend.location
+  service = google_cloud_run_service.backend.name
+  role    = "roles/run.invoker"
+  member  = "allUsers"
 }
 
 output "url" {
