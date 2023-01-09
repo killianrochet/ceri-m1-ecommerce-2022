@@ -140,17 +140,17 @@ data "google_iam_policy" "noauth" {
 
 resource "google_cloud_run_service_iam_member" "noauth" {
   location    = google_cloud_run_service.bluelion-backend.location
-  project     = google_cloud_run_service.bluelion-backend.project
-  service     = google_cloud_run_service.bluelion-backend.name
+  project     = google_cloud_run_service.blulion-backend.project
+  service     = google_cloud_run_service.blulion-backend.name
   role        = "roles/run.invoker"
   member      = "allUsers"
 }
 
-output "back_url" {
-  value = google_cloud_run_service.bluelion-backend.status[0].url
+output "url" {
+  value = "${google_cloud_run_service.bluelion-backend.status[0].url}"
 }
 
 output "front_url" {
-  value = google_cloud_run_service.bluelion-frontend.status[0].url
+  value = "${google_cloud_run_service.bluelion-frontend.status[0].url}"
 }
 
