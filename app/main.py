@@ -6,9 +6,9 @@ from fastapi import FastAPI
 from google.colab import auth
 from google.cloud.sql.connector import Connector
 import os
-if os.environ['GOOGLE_APPLICATION_CREDENTIALS'] is not None:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
-auth.authenticate_user()
+# if os.environ['GOOGLE_APPLICATION_CREDENTIALS'] is not None:
+#     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
+# auth.authenticate_user()
 
 connector = Connector()
 # initialize parameters
@@ -118,6 +118,7 @@ def read_songs():
         statement = select(Chansons)
         catalogue = session.exec(statement).all()
         return(catalogue)
+
 @app.get("/catalogue/albums/{album_id}")
 def read_catalogue_art(album_id: int):
     with Session(engine) as session:
