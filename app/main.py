@@ -1,15 +1,17 @@
 from typing import Union,Optional
 
 from sqlmodel import Field,SQLModel,create_engine,select,Session
-
 from fastapi import FastAPI
+<<<<<<< HEAD
 
 #import sqlalchemy
+=======
+import sqlalchemy
+>>>>>>> 9f51f662d6d06bcbb7c514860ed9929b8f08608e
 import os
+
 if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
-from dotenv import load_dotenv
-load_dotenv()
 # initialize parameters
 DB_USER = os.environ["DB_USER"]
 DB_PASS = os.environ["DB_PASS"]
