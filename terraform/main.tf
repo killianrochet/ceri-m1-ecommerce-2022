@@ -50,12 +50,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
         image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.3"
         env {
           name = "INSTANCE_CONNECTION_NAME"
-          value_from {
-            secret_key_ref {
-              name = data.google_secret_manager_secret.address.secret_id
-              key = "latest"
-            }
-          }
+          value = "ceri-m1-ecommerce-2022:europe-west1:mysql-primary"
         }
         env {
           name = "DB_NAME"
