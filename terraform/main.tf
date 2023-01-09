@@ -49,7 +49,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
       containers {
         image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.3"
         env {
-          name = "DATABASE_ADDRESS"
+          name = "INSTANCE_CONNECTION_NAME"
           value_from {
             secret_key_ref {
               name = data.google_secret_manager_secret.address.secret_id
@@ -58,7 +58,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
           }
         }
         env {
-          name = "DATABASE_NAME"
+          name = "DB_NAME"
           value_from {
             secret_key_ref {
               name = data.google_secret_manager_secret.database.secret_id
@@ -67,7 +67,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
           }
         }
         env {
-          name = "PASSWORD"
+          name = "DB_PASS"
           value_from {
             secret_key_ref {
               name = data.google_secret_manager_secret.password.secret_id
@@ -76,8 +76,8 @@ resource "google_cloud_run_service" "bluelion-backend" {
           }
         }
         env {
-          name = "DATABASE_USER"
-          value = "orangedog"
+          name = "DB_USER"
+          value = "bluelion"
         }
         ports {
           container_port = 8080
