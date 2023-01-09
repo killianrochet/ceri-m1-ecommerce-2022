@@ -3,23 +3,16 @@ from typing import Union,Optional
 from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
-from google.colab import auth
-from google.cloud.sql.connector import Connector
-import os
-if os.environ['GOOGLE_APPLICATION_CREDENTIALS'] is not None:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
-auth.authenticate_user()
 
-connector = Connector()
+from google.cloud.sql.connector import Connector,IPTypes
+import os
+iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+connector = Connector(iptypes)
 # initialize parameters
-project_id = os.environ["G_PROJECT_ID"]
-region = os.environ["G_REGION"]
-instance_name = os.environ["G_INSTANCE_NAME"]
-INSTANCE_CONNECTION_NAME = f"{project_id}:{region}:{instance_name}" # i.e demo-project:us-central1:demo-instance
-print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 DB_USER = os.environ["DB_USER"]
 DB_PASS = os.environ["DB_PASS"]
 DB_NAME = os.environ["DB_NAME"]
+INSTANCE_CONNECTION_NAME = os.environ["INSTANCE_CONNECTION_NAME"]
 conn = connector.connect(
         INSTANCE_CONNECTION_NAME,
         "pymysql",
