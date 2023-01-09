@@ -140,8 +140,8 @@ data "google_iam_policy" "noauth" {
 
 resource "google_cloud_run_service_iam_member" "noauth" {
   location    = google_cloud_run_service.bluelion-backend.location
-  project     = google_cloud_run_service.blulion-backend.project
-  service     = google_cloud_run_service.blulion-backend.name
+  project     = google_cloud_run_service.bluelion-backend.project
+  service     = google_cloud_run_service.bluelion-backend.name
   role        = "roles/run.invoker"
   member      = "allUsers"
 }
