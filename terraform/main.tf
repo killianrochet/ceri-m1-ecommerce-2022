@@ -145,6 +145,6 @@ output "back_url" {
 }
 
 output "front_url" {
-  value       = google_cloud_run_service.bluelion-frontend.status[0].url
+  value = google_cloud_run_service.bluelion-frontend.status[0].url
 }
 
