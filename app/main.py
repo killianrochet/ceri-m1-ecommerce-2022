@@ -116,6 +116,9 @@ def read_catalogue_art(artist_id: int):
 def lol():
     return(INSTANCE_CONNECTION_NAME)
 
+@app.get("/api/test")
+def test():
+    return("test")
 @app.get("/api/album/{album_id}")
 def get_list(album_id:int):
     with Session(engine) as session:
