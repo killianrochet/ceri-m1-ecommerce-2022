@@ -139,8 +139,9 @@ data "google_iam_policy" "invokers" {
 }
 
 resource "google_cloud_run_service_iam_member" "invokers" {
-  location = google_cloud_run_service.backend.location
-  service = google_cloud_run_service.backend.name
+  location = google_cloud_run_service.bluelion-backend.location
+  service = google_cloud_run_service.bluelion-backend.name
+  project     = google_cloud_run_service.bluelion-backend.project
   role    = "roles/run.invoker"
   member  = "allUsers"
 }
