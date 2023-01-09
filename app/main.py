@@ -6,6 +6,9 @@ from fastapi import FastAPI
 
 from google.cloud.sql.connector import Connector,IPTypes
 import os
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
+from dotenv import load_dotenv
+load_dotenv()
 iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 connector = Connector(iptypes)
 # initialize parameters
