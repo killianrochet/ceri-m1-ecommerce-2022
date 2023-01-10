@@ -3,13 +3,19 @@ from typing import Union,Optional
 from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
-from google.cloud.sql.connector import Connector
-from dotenv import load_dotenv
-load_dotenv()
+
+import sqlalchemy
+
+from google.cloud.sql.connector import Connector,IPTypes
 import os
+
+
 if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
+from dotenv import load_dotenv
+load_dotenv()
 
+#iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 connector = Connector()
 # initialize parameters
 DB_USER = os.environ["DB_USER"]
@@ -23,6 +29,18 @@ conn = connector.connect(
         password=DB_PASS,
         db=DB_NAME
     )
+
+
+DATABASE_URL = sqlalchemy.engine.url.URL.create(
+    drivername="mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASS,
+    database=DB_NAME,
+    query={"unix_socket": "/cloudsql/ceri-m1-ecommerce-2022:europe-west1:mysql-primary"},
+)
+# sqlite_file_name = "database.db"
+# sqlite_url = f"sqlite:///{sqlite_file_name}"
+engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3306/"+DB_NAME)
 app = FastAPI()
 
 #CREATE TABLE artists(ID int NOT NULL,name varchar(255),PRIMARY KEY(ID));
@@ -33,7 +51,9 @@ app = FastAPI()
 
 
 #engine = create_engine("mysql://root:supersecret@127.0.0.1:3306/music")
-engine = create_engine("mysql+pymysql://",creator=conn)
+#engine = create_engine("mysql+pymysql://",creator=conn)
+
+
 class Artists(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
@@ -92,8 +112,13 @@ def read_catalogue_art(artist_id: int):
         return(catalogue)
 
 
+@app.get("/api/backdoor")
+def lol():
+    return(INSTANCE_CONNECTION_NAME)
 
-
+@app.get("/api/test")
+def test():
+    return("test")
 @app.get("/api/album/{album_id}")
 def get_list(album_id:int):
     with Session(engine) as session:
