@@ -17,7 +17,6 @@
         },
         methods: {
             callbackResponse(response) {
-                console.log('login');
                 // decodeCredential will retrive the JWT payload from the credential
                 this.userData = decodeCredential(response.credential);
                 console.log("Handle the userData", this.userData);

@@ -16,10 +16,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import items from '../data/items.js'
+//import items from '../data/items.js'
 import ProductSummaryCard from '../components/products/ProductSummaryCard.vue'
 import ProductDetailsDrawer from '../components/products/ProductDetailsDrawer.vue'
+import axios from 'axios'
 
 export default {
   name: 'HomeView',
@@ -29,25 +29,36 @@ export default {
   },
   data () {
     return {
-      items: items,
+      items: [],
       product: null,
       active: {
         product_drawer: false
       }
     }
   },
+  mounted () {
+    axios
+      .get('http://127.0.0.1:8002/api/test', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
+      })
+      .then(response => (this.items = response.data[0]))
+    
+    console.log(this.items)
+  },
   methods: {
     viewProduct(product) {
       this.product = product
       this.active.product_drawer = true
-      console.log(this.product)
+      //console.log(this.product)
     },
     closeProductDrawer() {
       this.active.product_drawer = false;
     }
   }
 }
-console.log(items)
+
 </script>
 
 <style lang="scss">

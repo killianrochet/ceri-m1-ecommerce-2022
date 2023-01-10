@@ -4,15 +4,19 @@ from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
 
-from google.cloud.sql.connector import Connector
+import sqlalchemy
+
+from google.cloud.sql.connector import Connector,IPTypes
+import os
+
+
+if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './../../ceri-m1-ecommerce.json'
 from dotenv import load_dotenv
 load_dotenv()
-import os
-if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
 
 #iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
-#connector = Connector(iptypes)
+connector = Connector()
 # initialize parameters
 DB_USER = os.environ["DB_USER"]
 DB_PASS = os.environ["DB_PASS"]
@@ -25,6 +29,18 @@ conn = connector.connect(
         password=DB_PASS,
         db=DB_NAME
     )
+
+
+DATABASE_URL = sqlalchemy.engine.url.URL.create(
+    drivername="mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASS,
+    database=DB_NAME,
+    query={"unix_socket": "/cloudsql/ceri-m1-ecommerce-2022:europe-west1:mysql-primary"},
+)
+# sqlite_file_name = "database.db"
+# sqlite_url = f"sqlite:///{sqlite_file_name}"
+engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3308/"+DB_NAME)
 app = FastAPI()
 
 #CREATE TABLE artists(ID int NOT NULL,name varchar(255),PRIMARY KEY(ID));
@@ -34,7 +50,7 @@ app = FastAPI()
 
 
 
-#engine = create_engine("mysql://root:supersecret@127.0.0.1:3306/music")
+#engine = create_engine("mysql://root:supersecret@127.0.0.1:3308/music")
 #engine = create_engine("mysql+pymysql://",creator=conn)
 
 
