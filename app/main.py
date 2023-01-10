@@ -3,30 +3,44 @@ from typing import Union,Optional
 from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
-from google.colab import auth
-from google.cloud.sql.connector import Connector
-import os
-if os.environ['GOOGLE_APPLICATION_CREDENTIALS'] is not None:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
-auth.authenticate_user()
 
-connector = Connector()
+import sqlalchemy
+
+#from google.cloud.sql.connector import Connector,IPTypes
+import os
+
+
+if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
+from dotenv import load_dotenv
+load_dotenv()
+
+#iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+#connector = Connector(iptypes)
 # initialize parameters
-project_id = os.environ["G_PROJECT_ID"]
-region = os.environ["G_REGION"]
-instance_name = os.environ["G_INSTANCE_NAME"]
-INSTANCE_CONNECTION_NAME = f"{project_id}:{region}:{instance_name}" # i.e demo-project:us-central1:demo-instance
-print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 DB_USER = os.environ["DB_USER"]
 DB_PASS = os.environ["DB_PASS"]
 DB_NAME = os.environ["DB_NAME"]
-conn = connector.connect(
-        INSTANCE_CONNECTION_NAME,
-        "pymysql",
-        user=DB_USER,
-        password=DB_PASS,
-        db=DB_NAME
-    )
+INSTANCE_CONNECTION_NAME = os.environ["INSTANCE_CONNECTION_NAME"]
+#conn = connector.connect(
+#        INSTANCE_CONNECTION_NAME,
+#        "pymysql",
+#        user=DB_USER,
+#        password=DB_PASS,
+#        db=DB_NAME
+#    )
+
+
+DATABASE_URL = sqlalchemy.engine.url.URL.create(
+    drivername="mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASS,
+    database=DB_NAME,
+    query={"unix_socket": "/cloudsql/ceri-m1-ecommerce-2022:europe-west1:mysql-primary"},
+)
+# sqlite_file_name = "database.db"
+# sqlite_url = f"sqlite:///{sqlite_file_name}"
+engine = create_engine(DATABASE_URL)
 app = FastAPI()
 
 #CREATE TABLE artists(ID int NOT NULL,name varchar(255),PRIMARY KEY(ID));
@@ -37,7 +51,9 @@ app = FastAPI()
 
 
 #engine = create_engine("mysql://root:supersecret@127.0.0.1:3306/music")
-engine = create_engine("mysql+pymysql://",creator=conn)
+#engine = create_engine("mysql+pymysql://",creator=conn)
+
+
 class Artists(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
@@ -96,8 +112,13 @@ def read_catalogue_art(artist_id: int):
         return(catalogue)
 
 
+@app.get("/api/backdoor")
+def lol():
+    return(INSTANCE_CONNECTION_NAME)
 
-
+@app.get("/api/test")
+def test():
+    return("test")
 @app.get("/api/album/{album_id}")
 def get_list(album_id:int):
     with Session(engine) as session:
