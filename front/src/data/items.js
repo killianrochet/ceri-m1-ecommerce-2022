@@ -26,7 +26,8 @@ const items = [
                 name: "Da funk",
                 time: "3:29"
             },
-        ]
+        ],
+        image: "https://images.epagine.fr/910/0724384260910.jpg"
     },
     {
         id: 2,
@@ -55,7 +56,8 @@ const items = [
                 name: "Da funk",
                 time: "3:29"
             },
-        ]
+        ],
+        image: "https://images.epagine.fr/910/0724384260910.jpg"
     },
     {
         id: 3,
@@ -84,7 +86,8 @@ const items = [
                 name: "Da funk",
                 time: "3:29"
             },
-        ]
+        ],
+        image: "https://images.epagine.fr/910/0724384260910.jpg"
     },
     {
         id: 4,
@@ -113,7 +116,8 @@ const items = [
                 name: "Da funk",
                 time: "3:29"
             },
-        ]
+        ],
+        image: "https://images.epagine.fr/910/0724384260910.jpg"
     },
 ]
 

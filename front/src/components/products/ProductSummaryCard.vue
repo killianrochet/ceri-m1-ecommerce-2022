@@ -2,6 +2,8 @@
     <div class="card">
         <h3>{{ product.name }}</h3>
 
+        <img class="productImage" src="https://images.epagine.fr/910/0724384260910.jpg"/>
+
         <h5 class="price">Prix: {{ product.price.toFixed(2) }}€</h5>
         <p class="author">Auteur: {{ product.author }}</p>
         <p class="text-muted">{{product.category }}</p>
@@ -47,5 +49,11 @@
         font-size: 1.15rem;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .productImage {
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
