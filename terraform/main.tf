@@ -110,7 +110,7 @@ resource "google_cloud_run_service" "bluelion-frontend" {
           value = google_cloud_run_service.bluelion-backend.status[0].url
         }
         ports {
-          container_port = 80
+          container_port = 5000
         }
       }
     }
