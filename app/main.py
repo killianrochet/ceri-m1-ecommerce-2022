@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 import sqlalchemy
 
-#from google.cloud.sql.connector import Connector,IPTypes
+from google.cloud.sql.connector import Connector,IPTypes
 import os
 
 
@@ -16,19 +16,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 #iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
-#connector = Connector(iptypes)
+connector = Connector()
 # initialize parameters
 DB_USER = os.environ["DB_USER"]
 DB_PASS = os.environ["DB_PASS"]
 DB_NAME = os.environ["DB_NAME"]
 INSTANCE_CONNECTION_NAME = os.environ["INSTANCE_CONNECTION_NAME"]
-#conn = connector.connect(
-#        INSTANCE_CONNECTION_NAME,
-#        "pymysql",
-#        user=DB_USER,
-#        password=DB_PASS,
-#        db=DB_NAME
-#    )
+conn = connector.connect(
+        INSTANCE_CONNECTION_NAME,
+        "pymysql",
+        user=DB_USER,
+        password=DB_PASS,
+        db=DB_NAME
+    )
 
 
 DATABASE_URL = sqlalchemy.engine.url.URL.create(
@@ -40,7 +40,7 @@ DATABASE_URL = sqlalchemy.engine.url.URL.create(
 )
 # sqlite_file_name = "database.db"
 # sqlite_url = f"sqlite:///{sqlite_file_name}"
-engine = create_engine(DATABASE_URL)
+engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3306/"+DB_NAME)
 app = FastAPI()
 
 #CREATE TABLE artists(ID int NOT NULL,name varchar(255),PRIMARY KEY(ID));
