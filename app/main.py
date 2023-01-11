@@ -4,8 +4,13 @@ from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
 
-import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
+Base = declarative_base()
 from google.cloud.sql.connector import Connector,IPTypes
 import os
 
@@ -31,20 +36,14 @@ conn = connector.connect(
     )
 
 
-DATABASE_URL = sqlalchemy.engine.url.URL.create(
-    drivername="mysql+pymysql",
-    username=DB_USER,
-    password=DB_PASS,
-    database=DB_NAME,
-    query={"unix_socket": "/cloudsql/ceri-m1-ecommerce-2022:europe-west1:mysql-primary"},
-)
 # sqlite_file_name = "database.db"
 # sqlite_url = f"sqlite:///{sqlite_file_name}"
 engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3306/"+DB_NAME)
+session = Session(bind=engine)
 app = FastAPI()
 
 #CREATE TABLE artists(ID int NOT NULL,name varchar(255),PRIMARY KEY(ID));
-#CREATE TABLE albums(ID int NOT NULL,name varchar(255),artist_id int,PRIMARY KEY(ID),FOREIGN KEY(artist_id) REFERENCES artists(ID));
+#CREATE TABLE albums(ID int NOT NULL,name varchar(255),,artist_id int,PRIMARY KEY(ID),FOREIGN KEY(artist_id) REFERENCES artists(ID));
 #CREATE TABLE chanson(ID int NOT NULL,name varchar(255),album_id int,artist_id int,PRIMARY KEY(ID),FOREIGN KEY(album_id) REFERENCES albums(ID),FOREIGN KEY(artist_id) REFERENCES artists(ID));
 #
 
@@ -60,22 +59,25 @@ class Artists(SQLModel, table=True):
     
 
 
-class Chansons(SQLModel,table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    time: str
-    artist: Optional[int] = Field(default=None,foreign_key="artists.id")
-    album_id: Optional[int] = Field(default=None,foreign_key="albums.id")
-    
-class Albums(SQLModel,table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    author: str
-    price: int
-    category: str
-    artist_id: Optional[int] = Field(default=None,foreign_key="artists.id")
-    image: str
-    
+class Album(Base):
+    __tablename__ = "albums"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    author = Column(String, index=True)
+    price = Column(Integer)
+    category = Column(String,index=True)
+    image = Column(String,index=True)
+
+class Song(Base):
+    __tablename__ = "songs"
+    id = Column(Integer, primary_key=True, index=True)
+    album_id = Column(Integer, ForeignKey("albums.id"))
+    name = Column(String, index=True)
+    duration = Column(Integer)
+    album = relationship("Album", back_populates="songs")
+
+Album.songs = relationship("Song", order_by=Song.id, back_populates="album")
+
 class Albums_output:
     def __init__(self,id,name,image):
         self.id = id
@@ -119,57 +121,31 @@ def lol():
 @app.get("/api/test")
 def test():
     return("test")
-@app.get("/api/album/{album_id}")
-def get_list(album_id:int):
-    with Session(engine) as session:
-        statement = select(Albums).where(Albums.id == album_id)
-        allalbums = session.exec(statement).all()
-        output = []
-        for album in allalbums:
-            obj = Albums_output(album.id,album.name,album.image)
-            statement_match = select(Chansons).where(Chansons.id == album.id)
-            allchants = session.exec(statement_match).all()
-            obj.songs = allchants
-            output.append(obj)
-        return(output)
-
-@app.get("/api/album/song")
-def read_songs():
-    with Session(engine) as session:
-        statement = select(Chansons)
-        catalogue = session.exec(statement).all()
-        return(catalogue)
-@app.get("/catalogue/albums/{album_id}")
-def read_catalogue_art(album_id: int):
-    with Session(engine) as session:
-        statement = select(Chansons).where(Chansons.album_id == album_id)
-        catalogue = session.exec(statement).all()
-        return(catalogue)
-
-
-@app.get("/catalogue/artiste/{artist_id}")
-def read_catalogue_art(artist_id: int):
-    with Session(engine) as session:
-        statement = select(Albums).where(Albums.artist_id == artist_id)
-        catalogue = session.exec(statement).all()
-        return(catalogue)
-
-
-
 
 @app.get("/api/albums")
-def get_list():
-    with Session(engine) as session:
-        statement = select(Albums)
-        allalbums = session.exec(statement).all()
-        output = []
-        for album in allalbums:
-            obj = Albums_output(album.id,album.name,album.image)
-            statement_match = select(Chansons).where(Chansons.id == album.id)
-            allchants = session.exec(statement_match).all()
-            obj.songs = allchants
-            output.append(obj)
-        return(output)
+def get_albums():
+    albums = session.query(Album).all()
+    return [
+        {
+            "id": album.id,
+            "name": album.name,
+            "author": album.author,
+            "price": album.price,
+            "category": album.category,
+            "image": album.image,
+            "songs": [
+                {
+                    "id": song.id,
+                    "song_title": song.name,
+                    "duration":song.duration
+                }
+                for song in album.songs
+            ]
+        }
+        for album in albums
+    ]
+    
+
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
