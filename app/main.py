@@ -3,7 +3,7 @@ from typing import Union,Optional
 from sqlmodel import Field,SQLModel,create_engine,select,Session
 
 from fastapi import FastAPI
-
+import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.declarative import declarative_base
@@ -52,21 +52,31 @@ class Artists(SQLModel, table=True):
 
 
 class Album(Base):
-    __tablename__ = "albums"
+    __tablename__ = "albums2"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     author = Column(String, index=True)
     price = Column(Integer)
     category = Column(String,index=True)
     image = Column(String,index=True)
+    stock = Column(Integer)
 
 class Song(Base):
-    __tablename__ = "songs"
+    __tablename__ = "songs2"
     id = Column(Integer, primary_key=True, index=True)
-    album_id = Column(Integer, ForeignKey("albums.id"))
+    album_id = Column(Integer, ForeignKey("albums2.id"))
     name = Column(String, index=True)
     duration = Column(Integer)
     album = relationship("Album", back_populates="songs")
+
+class Order(Base):
+    __tablename__ = "orders"
+    id = Column(Integer, primary_key=True, index=True)
+    customer_name = Column(String)
+    customer_address = Column(String)
+    customer_phone_number = Column(String)
+    album_id = Column(Integer,ForeignKey("albums.id"))
+    date = Column(String)
 
 Album.songs = relationship("Song", order_by=Song.id, back_populates="album")
 
@@ -96,6 +106,42 @@ def read_catalogue_art(album_id: int):
         catalogue = session.exec(statement).all()
         return(catalogue)
 
+@app.post("/order/create")
+async def create_order(
+    customer_name: str,
+    customer_address: str,
+    customer_phone_number: str,
+    album_id: int
+):
+    album = session.query(Album).filter(Album.id == album_id).first()
+    if album.stock > 0:
+        order = Order(
+            customer_name=customer_name,
+            customer_address=customer_address,
+            customer_phone_number=customer_phone_number,
+            album_id=album_id,
+            date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        )
+        session.add(order)
+        album.stock -= 1
+        session.commit()
+        return {"message": "Order created successfully"}
+    else:
+        return {"message": "Stock not available"}
+
+@app.get("/order/list")
+def list_orders():
+    orders = session.query(Order).all()
+    return [
+        {
+            "customer_name": order.customer_name,
+            "customer_address": order.customer_address,
+            "customer_phone_number": order.customer_phone_number,
+            "album_id": order.album_id,
+            "date": order.date,
+        }
+        for order in orders
+    ]
 
 
 @app.get("/catalogue/artiste/{artist_id}")
@@ -125,6 +171,7 @@ def get_albums():
             "price": album.price,
             "category": album.category,
             "image": album.image,
+            "stock": album.stock,
             "songs": [
                 {
                     "id": song.id,
