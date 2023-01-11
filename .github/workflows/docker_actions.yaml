@@ -42,11 +42,11 @@ jobs:
       - name: Build the Docker image
         run: docker build -t backend -f Dockerfile .
       - name: Tag to version
-        run: docker tag backend europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.21
+        run: docker tag backend europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.22
       - name: Login to registry
         run: docker login -u _json_key_base64 -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }} https://europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion
       - name: Push to registry
-        run: docker push europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.21
+        run: docker push europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.22
   docker_front:
     name: Front docker image   
     runs-on: ubuntu-latest
@@ -58,11 +58,11 @@ jobs:
       - name: Build the Docker image
         run: docker build -t backend -f Dockerfile .
       - name: Tag to version
-        run: docker tag backend europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/frontend:0.0.21
+        run: docker tag backend europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/frontend:0.0.22
       - name: Login to registry
         run: docker login -u _json_key_base64 -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }} https://europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion
       - name: Push to registry
-        run: docker push europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/frontend:0.0.21
+        run: docker push europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/frontend:0.0.22
 
         
   deploy_terraform:
