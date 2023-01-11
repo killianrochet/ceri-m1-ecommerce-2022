@@ -5,6 +5,7 @@ from sqlmodel import Field,SQLModel,create_engine,select,Session
 from fastapi import FastAPI
 import datetime
 from sqlalchemy import create_engine
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
@@ -14,7 +15,12 @@ Base = declarative_base()
 from google.cloud.sql.connector import Connector,IPTypes
 import os
 
-
+class Item(BaseModel):
+    customer_name: str
+    customer_address: str
+    customer_phone_number: str
+    album_id: int
+    
 #if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
 #    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './../../ceri-m1-ecommerce.json'
 from dotenv import load_dotenv
@@ -107,19 +113,14 @@ def read_catalogue_art(album_id: int):
         return(catalogue)
 
 @app.post("/order/create")
-async def create_order(
-    customer_name: str,
-    customer_address: str,
-    customer_phone_number: str,
-    album_id: int
-):
-    album = session.query(Album).filter(Album.id == album_id).first()
+async def create_order(item:Item):
+    album = session.query(Album).filter(Album.id == item.album_id).first()
     if album.stock > 0:
         order = Order(
-            customer_name=customer_name,
-            customer_address=customer_address,
-            customer_phone_number=customer_phone_number,
-            album_id=album_id,
+            customer_name=item.customer_name,
+            customer_address=item.customer_address,
+            customer_phone_number=item.customer_phone_number,
+            album_id=item.album_id,
             date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         )
         session.add(order)
