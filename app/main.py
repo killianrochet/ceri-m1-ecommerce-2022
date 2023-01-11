@@ -16,7 +16,7 @@ import os
 
 
 if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './../../ceri-m1-ecommerce.json'
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -38,8 +38,12 @@ conn = connector.connect(
 
 # sqlite_file_name = "database.db"
 # sqlite_url = f"sqlite:///{sqlite_file_name}"
+<<<<<<< HEAD
 engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3306/"+DB_NAME)
 session = Session(bind=engine)
+=======
+engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3308/"+DB_NAME)
+>>>>>>> 76529c395aa336840f605693bb147b1235081c46
 app = FastAPI()
 
 #CREATE TABLE artists(ID int NOT NULL,name varchar(255),PRIMARY KEY(ID));
@@ -49,7 +53,7 @@ app = FastAPI()
 
 
 
-#engine = create_engine("mysql://root:supersecret@127.0.0.1:3306/music")
+#engine = create_engine("mysql://root:supersecret@127.0.0.1:3308/music")
 #engine = create_engine("mysql+pymysql://",creator=conn)
 
 
