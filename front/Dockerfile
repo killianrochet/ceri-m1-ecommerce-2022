@@ -12,4 +12,6 @@ RUN npm run build
 FROM nginx:stable-alpine as production-stage
 
 COPY --from=build-stage /code/dist /usr/share/nginx/html
-CMD ["nginx", "-g", "daemon off;"]
+
+EXPOSE 8080
+CMD ["npx", "serve", "build"]
