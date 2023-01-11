@@ -47,7 +47,7 @@ resource "google_cloud_run_service" "bluelion-backend" {
     spec {
       service_account_name = "terraform-bluelion@ceri-m1-ecommerce-2022.iam.gserviceaccount.com"
       containers {
-        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.23"
+        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/backend:0.0.24"
         env {
           name = "INSTANCE_CONNECTION_NAME"
           value = "ceri-m1-ecommerce-2022:europe-west1:mysql-primary"
@@ -104,7 +104,7 @@ resource "google_cloud_run_service" "bluelion-frontend" {
     spec {
       service_account_name = "terraform-bluelion@ceri-m1-ecommerce-2022.iam.gserviceaccount.com"
       containers {
-        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/frontend:0.0.23"
+        image = "europe-west1-docker.pkg.dev/ceri-m1-ecommerce-2022/bluelion/frontend:0.0.24"
         env {
           name = "BACKEND_URL"
           value = google_cloud_run_service.bluelion-backend.status[0].url
