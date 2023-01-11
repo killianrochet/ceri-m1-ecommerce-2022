@@ -9,10 +9,8 @@ import sqlalchemy
 import os
 
 
-if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
-from dotenv import load_dotenv
-load_dotenv()
+# if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
+#     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './ceri-m1-ecommerce.json'
 
 #iptypes = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 # initialize parameters
