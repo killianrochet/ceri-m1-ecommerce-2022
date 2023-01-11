@@ -21,6 +21,7 @@ import ProductSummaryCard from '../components/products/ProductSummaryCard.vue'
 import ProductDetailsDrawer from '../components/products/ProductDetailsDrawer.vue'
 import axios from 'axios'
 
+
 export default {
   name: 'HomeView',
   components: {
@@ -37,21 +38,25 @@ export default {
     }
   },
   mounted () {
+    var self = this;
     axios
-      .get('http://127.0.0.1:8002/api/test', {
+      .get('http://127.0.0.1:8002/api/albums', {
         headers: {
           'Access-Control-Allow-Origin': '*',
         }
       })
-      .then(response => (this.items = response.data[0]))
-    
-    console.log(this.items)
+      .then(
+        function (response) {
+          self.items = response.data;
+          console.log('Response from API : ', self.items)
+          console.log(typeof(self.items))
+        }
+      );
   },
   methods: {
     viewProduct(product) {
       this.product = product
       this.active.product_drawer = true
-      //console.log(this.product)
     },
     closeProductDrawer() {
       this.active.product_drawer = false;

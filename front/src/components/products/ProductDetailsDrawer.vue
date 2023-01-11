@@ -8,11 +8,11 @@
         <div class="drawer-close" @click="$emit('close-product-drawer')">X</div>
         <div v-if="product" class="product-details">
             <h3 class="text-center">{{ product.name }}</h3>
-            <img class="productImage" src="https://images.epagine.fr/910/0724384260910.jpg"/>
+            <img class="productImage" :src="product.image"/>
 
             <h4>Pistes :</h4>
             <ul>
-                <li class="song" v-for="song in product.songs" :key="song.id">{{ song.name }} - {{ song.time }}</li> 
+                <li class="song" v-for="song in product.songs" :key="song.id">{{ song.song_title }} - {{ song.duration }}s</li> 
             </ul>
             <h3 class="text-center">{{ product.price.toFixed(2) }}€</h3>
         

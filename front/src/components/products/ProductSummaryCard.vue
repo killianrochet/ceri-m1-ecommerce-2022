@@ -7,6 +7,7 @@
         <h5 class="price">Prix: {{ product.price.toFixed(2) }}€</h5>
         <p class="author">Auteur: {{ product.author }}</p>
         <p class="text-muted">{{product.category }}</p>
+        <p>En stock : {{ product.stock }}</p>
         <button class="view-product-button" @click="$emit('view-product', product)">Détails</button>
     </div>
 </template>

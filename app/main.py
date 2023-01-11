@@ -30,7 +30,7 @@ INSTANCE_CONNECTION_NAME = os.environ["INSTANCE_CONNECTION_NAME"]
 
 # sqlite_file_name = "database.db"
 # sqlite_url = f"sqlite:///{sqlite_file_name}"
-engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3306/"+DB_NAME)
+engine = create_engine("mysql://"+DB_USER+":"+DB_PASS+"@127.0.0.1:3309/"+DB_NAME)
 session = Session(bind=engine)
 app = FastAPI()
 
