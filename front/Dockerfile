@@ -14,4 +14,4 @@ FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /code/dist /usr/share/nginx/html
 
 EXPOSE 8080
-CMD ["npx", "serve", "build"]
+CMD ["nginx", "-g", "daemon off;"]
